@@ -6,8 +6,8 @@
 ### Usage with [ninject] (http://www.ninject.org/)
 
 ```c#
-  kernel.Bind<DbContext>().To<YourContext>().InRequestScope();
-  kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>)).InRequestScope();
+	kernel.Bind<DbContext>().To<YourContext>().InRequestScope();
+	kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>)).InRequestScope();
 ```
 
 IRepository is a shell of DBSet<> and contains next methods:
