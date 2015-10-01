@@ -33,7 +33,7 @@ public interface IRepository<T>
 * Use ISelfDependency interface to cast cast helpers and services to self
 
 ```c#
-  var assemblies = new Assembly[2];
+	var assemblies = new Assembly[2];
 	assemblies[0] = typeof(IDependency).Assembly;
 	assemblies[1] = assembly //your working assembly;
 
