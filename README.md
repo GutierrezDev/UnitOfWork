@@ -12,7 +12,7 @@
 
 IRepository is a shell of DBSet<> and contains next methods:
 ```c#
-public interface IRepository<T>
+	public interface IRepository<T>
 	{
 		T Get(Expression<Func<T, bool>> predicate);
 		T FirstOrDefault(Expression<Func<T, bool>> predicate);
@@ -25,7 +25,6 @@ public interface IRepository<T>
 		int Count(Expression<Func<T, bool>> predicate);
 		int Count();
 	}
-}
 ```
 
 ### Usage with [Ninject.Extensions.Conventions] (https://github.com/ninject/ninject.extensions.conventions)
