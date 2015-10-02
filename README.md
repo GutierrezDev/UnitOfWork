@@ -29,7 +29,7 @@ IRepository is a shell of DBSet<> and contains next methods:
 
 ### Usage with [Ninject.Extensions.Conventions] (https://github.com/ninject/ninject.extensions.conventions)
 * Use IDependency interface to cast services to implemented interfaces
-* Use ISelfDependency interface to cast cast helpers and services to self
+* Use ISelfDependency interface to cast helpers and services to self
 
 ```c#
 	var assemblies = new Assembly[2];
