@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using UnitOfWork.Interfaces;
 
 namespace UnitOfWork.UnitOfWork
@@ -15,6 +16,17 @@ namespace UnitOfWork.UnitOfWork
 		public DbContext Context
 		{
 			get { return _context; }
+		}
+
+		public T GetContext<T>()
+			where T : class
+		{
+			if (!(Context is T))
+			{
+				throw new NullReferenceException();
+			}
+
+			return Context as T;
 		}
 
 		public void Commit()
