@@ -10,7 +10,7 @@
 	kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>)).InRequestScope();
 ```
 
-IRepository is a shell of DBSet<> and contains next methods:
+```IRepository``` is a shell of ```DBSet<>``` and contains next methods:
 ```c#
 	public interface IRepository<T>
 	{
@@ -28,8 +28,8 @@ IRepository is a shell of DBSet<> and contains next methods:
 ```
 
 ### Usage with [Ninject.Extensions.Conventions] (https://github.com/ninject/ninject.extensions.conventions)
-* Use IDependency interface to cast services to implemented interfaces
-* Use ISelfDependency interface to cast helpers and services to self
+* Use ```IDependency``` interface to cast services to implemented interfaces
+* Use ```ISelfDependency``` interface to cast helpers and services to self
 
 ```c#
 	var assemblies = new Assembly[2];
@@ -49,7 +49,7 @@ IRepository is a shell of DBSet<> and contains next methods:
 			.Configure(b => b.InRequestScope()));
 ```
 
-### By the way, if you need to get context in specified type, just use `GetContext<T>()`
+### By the way, if you need to get context in specified type, just use ```GetContext<T>()```
 ```c#
 	_unitOfWork.GetContext<YourContext>();
 ```
