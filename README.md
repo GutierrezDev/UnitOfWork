@@ -34,7 +34,7 @@
 ```c#
 	var assemblies = new Assembly[2];
 	assemblies[0] = typeof(IDependency).Assembly;
-	assemblies[1] = assembly //your working assembly;
+	assemblies[1] = assembly; //your working assembly
 
 	kernel.Bind(x => x.From(assemblies)
 			.SelectAllClasses()
