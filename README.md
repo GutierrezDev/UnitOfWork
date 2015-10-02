@@ -48,3 +48,9 @@ IRepository is a shell of DBSet<> and contains next methods:
 			.BindToSelf()
 			.Configure(b => b.InRequestScope()));
 ```
+
+### By the way, if you need to get context in specified type, just use GetContext<T>
+```c#
+	_unitOfWork.GetContext<YourContext>();
+```
+If it's not possible to cast to type, you'll get null reference exception
