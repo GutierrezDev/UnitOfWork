@@ -4,12 +4,12 @@ using UnitOfWork.Interfaces;
 
 namespace UnitOfWork.Test
 {
-	public class UnitOfWork<TContextType> : IUnitOfWorkTest<TContextType>, IDependency
+	public class UnitOfWorkTest<TContextType> : IUnitOfWorkTest<TContextType>, IDependency
 		where TContextType : class
 	{
 		private readonly DbContext _context;
 
-		public UnitOfWork(TContextType context)
+		public UnitOfWorkTest(TContextType context)
 		{
 			if (!typeof(TContextType).IsSubclassOf(typeof(DbContext)))
 			{
