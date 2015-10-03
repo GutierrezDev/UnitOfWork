@@ -58,12 +58,12 @@ If it's not possible to cast to type, you'll get null reference exception
 ### Multiple contexts
 #### If you want to use UnitOfWork with multiple contexts, you should specify each ```IRepository<TDbSetType, TContextType>``` manually with context type:
 ```c#
-kernel.Bind<IUnitOfWorkTest<YourContext1>>().To<UnitOfWorkTest<YourContext1>>().InRequestScope();
-kernel.Bind<IUnitOfWorkTest<YourContext2>>().To<UnitOfWorkTest<YourContext2>>().InRequestScope();
+kernel.Bind<IUnitOfWork<YourContext1>>().To<UnitOfWork<YourContext1>>().InRequestScope();
+kernel.Bind<IUnitOfWork<YourContext2>>().To<UnitOfWork<YourContext2>>().InRequestScope();
 	
-kernel.Bind<IRepositoryTest<DbSetType1, YourContext1>>()
-	.To<BaseRepositoryTest<DbSetType1, YourContext1>>().InRequestScope();
-kernel.Bind<IRepositoryTest<DbSetType2, YourContext2>>()
-	.To<BaseRepositoryTest<DbSetType2, YourContext2>>().InRequestScope();
+kernel.Bind<IRepository<DbSetType1, YourContext1>>()
+	.To<BaseRepository<DbSetType1, YourContext1>>().InRequestScope();
+kernel.Bind<IRepository<DbSetType2, YourContext2>>()
+	.To<BaseRepository<DbSetType2, YourContext2>>().InRequestScope();
 ```
 #### Later you will just need to put ```IRepository<TDbSetType, TContextType>``` to constructor to inject with specific context.
