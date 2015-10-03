@@ -1,22 +1,23 @@
-using UnitOfWork;
-using UnitOfWork.Test;
+using System;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
+using UnitOfWork.Repository.Classes;
+using UnitOfWork.Repository.Interfaces;
+using UnitOfWork.UnitOfWork.Classes;
+using UnitOfWork.UnitOfWork.Interfaces;
+using UOW.Web.App_Start;
 using UOW.Web.DataModel1;
 using UOW.Web.DataModel2;
 using UOW.Web.Service;
+using WebActivatorEx;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UOW.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(UOW.Web.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace UOW.Web.App_Start
 {
-	using System;
-	using System.Web;
-
-	using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-	using Ninject;
-	using Ninject.Web.Common;
-
 	public static class NinjectWebCommon
 	{
 		private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -67,11 +68,11 @@ namespace UOW.Web.App_Start
 		/// <param name="kernel">The kernel.</param>
 		private static void RegisterServices(IKernel kernel)
 		{
-			kernel.Bind<IUnitOfWorkTest<NoTime>>().To<UnitOfWorkTest<NoTime>>().InRequestScope();
-			kernel.Bind<IUnitOfWorkTest<X4fleet>>().To<UnitOfWorkTest<X4fleet>>().InRequestScope();
+			kernel.Bind<IUnitOfWork<NoTime>>().To<UnitOfWork<NoTime>>().InRequestScope();
+			kernel.Bind<IUnitOfWork<X4fleet>>().To<UnitOfWork<X4fleet>>().InRequestScope();
 
-			kernel.Bind<IRepositoryTest<Account, X4fleet>>().To<BaseRepositoryTest<Account, X4fleet>>().InRequestScope();
-			kernel.Bind<IRepositoryTest<ERP_Contacts, NoTime>>().To<BaseRepositoryTest<ERP_Contacts, NoTime>>().InRequestScope();
+			kernel.Bind<IRepository<Account, X4fleet>>().To<BaseRepository<Account, X4fleet>>().InRequestScope();
+			kernel.Bind<IRepository<ERP_Contacts, NoTime>>().To<BaseRepository<ERP_Contacts, NoTime>>().InRequestScope();
 
 			kernel.Bind<IManageAccountsAndContacts>().To<ManageAccountsAndContacts>().InRequestScope();
 		}

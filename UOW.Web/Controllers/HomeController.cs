@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using UnitOfWork;
-using UnitOfWork.Test;
-using UOW.Web.DataModel1;
-using UOW.Web.DataModel2;
+﻿using System.Web.Mvc;
 using UOW.Web.Service;
 
 namespace UOW.Web.Controllers
