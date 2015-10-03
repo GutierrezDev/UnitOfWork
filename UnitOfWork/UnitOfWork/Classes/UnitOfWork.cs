@@ -19,7 +19,7 @@ namespace UnitOfWork.UnitOfWork.Classes
 			get { return _context; }
 		}
 
-		public T GetContext<T>()
+		public T CastedContext<T>()
 			where T : class
 		{
 			if (!(Context is T))

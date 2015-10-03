@@ -7,7 +7,7 @@ namespace UnitOfWork.UnitOfWork.Interfaces
 	{
 		DbContext Context { get; }
 
-		T GetContext<T>()
+		T CastedContext<T>()
 			where T : class;
 
 		void Commit();
