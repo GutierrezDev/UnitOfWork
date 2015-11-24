@@ -8,6 +8,7 @@
 ```c#
 kernel.Bind<DbContext>().To<YourContext>().InRequestScope();
 kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>)).InRequestScope();
+kernel.Bind(IUnitOfWork).To(UnitOfWork).InRequestScope();
 ```
 
 ```IRepository``` is a shell of ```DBSet<>``` and contains next methods:
