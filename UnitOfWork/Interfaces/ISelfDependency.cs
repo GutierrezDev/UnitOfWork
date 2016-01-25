@@ -1,6 +1,9 @@
-﻿namespace UnitOfWork.Interfaces
+﻿using System;
+
+namespace UnitOfWork.Interfaces
 {
-	public interface ISelfDependency
+    [Obsolete("Interface was deprecated. Use SelfInjectionAttribute intead.")]
+    interface ISelfDependency1
 	{
 		 
 	}

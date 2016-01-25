@@ -14,11 +14,9 @@ namespace UnitOfWork.UnitOfWork.Interfaces
 	}
 
 	public interface IUnitOfWork<TContextType> : IDisposable
-		where TContextType : class
+		where TContextType : DbContext
 	{
-		DbContext Context { get; }
-
-		TContextType CastedContext { get; }
+		TContextType Context { get; }
 
 		void Commit();
 	}

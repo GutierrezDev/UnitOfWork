@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Data.Entity;
+using UnitOfWork.Attributes;
 using UnitOfWork.Interfaces;
 using UnitOfWork.UnitOfWork.Interfaces;
 
 namespace UnitOfWork.UnitOfWork.Classes
 {
-	public class UnitOfWork : IUnitOfWork, IDependency
+    [InterfaceInjection]
+	public class UnitOfWork : IUnitOfWork
 	{
-		private readonly DbContext _context;
+        private bool _isDisposed;
 
 		public UnitOfWork(DbContext context)
 		{
-			_context = context;
+			Context = context;
 		}
 
-		public DbContext Context
-		{
-			get { return _context; }
-		}
+		public DbContext Context { get; }
 
-		public T CastedContext<T>()
-			where T : class
-		{
+        public T CastedContext<T>()
+			where T : class 
+        {
 			if (!(Context is T))
 			{
-				throw new NullReferenceException();
+				throw new InvalidCastException();
 			}
 
 			return Context as T;
@@ -32,62 +31,58 @@ namespace UnitOfWork.UnitOfWork.Classes
 
 		public void Commit()
 		{
-			_context.SaveChanges();
+			Context.SaveChanges();
 		}
 
 		public void Dispose()
 		{
-			if (_context != null)
-			{
-				_context.Dispose();
-			}
+		    if (_isDisposed)
+		    {
+		        return;
+		    }
+
+		    if (Context == null)
+		    {
+		        return;
+		    }
+
+		    Context.Dispose();
+		    _isDisposed = true;
 		}
 	}
 
-	public class UnitOfWork<TContextType> : IUnitOfWork<TContextType>, IDependency
-		where TContextType : class
+    [InterfaceInjection]
+	public class UnitOfWork<TContextType> : IUnitOfWork<TContextType>
+		where TContextType : DbContext
 	{
-		private readonly DbContext _context;
+        private bool _isDisposed;
 
-		public UnitOfWork(TContextType context)
+        public UnitOfWork(TContextType context)
 		{
-			if (!typeof(TContextType).IsSubclassOf(typeof(DbContext)))
-			{
-				throw new InvalidCastException();
-			}
-
-			_context = context as DbContext;
+			Context = context;
 		}
 
-		public DbContext Context
-		{
-			get { return _context; }
-		}
+		public TContextType Context { get; }
 
-		public TContextType CastedContext
+        public void Commit()
 		{
-			get
-			{
-				if (!(Context is TContextType))
-				{
-					throw new NullReferenceException();
-				}
-
-				return Context as TContextType;
-			}
-		}
-
-		public void Commit()
-		{
-			_context.SaveChanges();
+			Context.SaveChanges();
 		}
 
 		public void Dispose()
 		{
-			if (_context != null)
-			{
-				_context.Dispose();
-			}
+		    if (_isDisposed)
+		    {
+		        return;
+		    }
+
+		    if (Context == null)
+		    {
+		        return;
+		    }
+
+		    Context.Dispose();
+		    _isDisposed = true;
 		}
 	}
 }

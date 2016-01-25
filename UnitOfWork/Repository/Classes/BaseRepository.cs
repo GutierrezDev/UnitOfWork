@@ -76,7 +76,7 @@ namespace UnitOfWork.Repository.Classes
 
 	public class BaseRepository<TDbSetType, TContextType> : IRepository<TDbSetType, TContextType>
 		where TDbSetType : class
-		where TContextType : class
+		where TContextType : DbContext
 	{
 		private readonly DbSet<TDbSetType> _dbSet;
 
